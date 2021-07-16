@@ -11,35 +11,37 @@ using std::istream;
 using std::ostream;
 
 
-//---------------------------Ïðåäèêàò------------------
+//---------------------------Предикат------------------
 bool audienceGreater(Audience &lhs, Audience &rhs)
 {
 	return lhs.getRoomNumber() > rhs.getRoomNumber();
 }
 
+// перегрузим оператор ввода (>>) 
 istream& operator >> (istream &istrm, Audience &rhs)
 {
 	return rhs.scanAudience(istrm);
 }
 
+// перегрузим оператор вывода (<<)
 ostream& operator<< (ostream &istrm, const Audience &rhs)
 {
 	return rhs.printAudience(istrm);
 }
 
-WorkWithAudience::WorkWithAudience()
+WorkWithAudience::WorkWithAudience(/*Audience _audience) : audience(_audience*/)
 {   }
 
 void WorkWithAudience::setNewAudience(vector<Audience>& collect)
 {
 	Audience temp;
-	string specialization{}; 
-	int roomNumber{};         
-	int floor{};             
-	int numberOfSeats{};     
-	int classroomArea{};     
+	string specialization{}; // специализация
+	int roomNumber{};        // номер аудитории 
+	int floor{};             // этаж
+	int numberOfSeats{};     // число посадочных мест
+	int classroomArea{};     // площадь аудитории
 
-	cout << "Введите специализацию:" << endl;
+	cout << "Введите специализацию (одним слововом без пробелов):" << endl;
 	cin >> specialization;
 	temp.setSpecialization(specialization);
 
@@ -73,22 +75,22 @@ void WorkWithAudience::editingAudience(std::vector<Audience>& collect, int numbe
 
 	if (result != collect.end())
 	{
-		cout << "Введите специализацию для поиска: \n";
-		cout << "ñïåöèàëèçàöèÿ:\n";
+		cout << "Введите новые параметры аудитории: \n";
+		cout << "специализация:\n";
 		cin >> tempSpecialization;
 		result->setSpecialization(tempSpecialization);
-		cout << "ýòàæ:\n";
+		cout << "этаж:\n";
 		cin >> tempFloor;
 		result->setFloor(tempFloor);
-		cout << "÷èñëî ìåñò:\n";
+		cout << "число мест:\n";
 		cin >> tempNumberOfSeats;
 		result->setNumberOfSeats(tempNumberOfSeats);
-		cout << "ïëîùàäü:\n";
+		cout << "площадь:\n";
 		cin >> tempClassroomArea;
 		result->setClassroomArea(tempClassroomArea);
 	}
 	else
-		cout << "Àóäèòîðèÿ ñ íîìåðîì: " << number << " íå íàéäåíà\n";
+		cout << "Аудитория с номером: " << number << " не найдена\n";
 }
 
 void WorkWithAudience::deleteAudience(vector<Audience>& collect, int number)
@@ -99,10 +101,10 @@ void WorkWithAudience::deleteAudience(vector<Audience>& collect, int number)
 	{
 		*result = std::move(collect.back());
 		collect.pop_back();
-		cout << "Àóäèòîðèÿ ñ íîìåðîì: " << number << " óäàëåíà\n";
+		cout << "Аудитория с номером: " << number << " удалена\n";
 	}
 	else
-		cout << "Àóäèòîðèÿ ñ íîìåðîì: " << number << " íå íàéäåíà\n";
+		cout << "Аудитория с номером: " << number << " не найдена\n";
 }
 
 void WorkWithAudience::searchByAudienceNumber(const vector<Audience>& audienceintsCollection, int roomNumber)
@@ -110,9 +112,9 @@ void WorkWithAudience::searchByAudienceNumber(const vector<Audience>& audiencein
 	auto result = find(audienceintsCollection.begin(), audienceintsCollection.end(), roomNumber);
 
 	if (result != audienceintsCollection.end())
-		cout << "Àóäèòîðèÿ ñ íîìåðîì: " << roomNumber << " íàéäåíà\n";
+		cout << "Аудитория с номером: " << roomNumber << " найдена\n";
 	else
-		cout << "Àóäèòîðèÿ ñ íîìåðîì: " << roomNumber << " íå íàéäåíà\n";
+		cout << "Аудитория с номером: " << roomNumber << " не найдена\n";
 }
 
 void WorkWithAudience::findingAudienceWithSpecialty(const vector<Audience>& collect, string specialization)
@@ -120,9 +122,9 @@ void WorkWithAudience::findingAudienceWithSpecialty(const vector<Audience>& coll
 	auto result = find(collect.begin(), collect.end(), specialization);
 
 	if (result != collect.end())
-		cout << "Àóäèòîðèÿ ñî ñïåöèàëèçàöèåé: " << specialization << " íàéäåíà\n";
+		cout << "Аудитория со специализацией: " << specialization << " найдена\n";
 	else
-		cout << "Àóäèòîðèÿ ñî ñïåöèàëèçàöèåé: " << specialization << " íå íàéäåíà\n";
+		cout << "Аудитория со специализацией: " << specialization << " не найдена\n";
 }
 
 void WorkWithAudience::showAudienceInfo(const vector<Audience>& collect, int floor)
@@ -141,7 +143,7 @@ void WorkWithAudience::showAudienceInfo(const vector<Audience>& collect, int flo
 		std::sort(tempAudienceColl.begin(), tempAudienceColl.end(), audienceGreater);
 	else
 	{
-		cout << "Àóäèòîðèé äëÿ ýòàæà " << floor << " íå íàéäåíî\n";
+		cout << "Аудиторий для этажа " << floor << " не найдено\n";
 		return;
 	}
 
@@ -165,10 +167,10 @@ void WorkWithAudience::readDataFromFile(vector<Audience>& collect, string fileNa
 {
 	ifstream file(fileName);
 
-	// ïîëó÷àåì äàííûå èç ôàéëà
+	// получаем данные из файла
 	if (!file.is_open())
 	{
-		cout << "Íå óäàëîñü îòêðûòü ôàéë áóäóò ñîçäàíû íîâûå çàïèñè\n";
+		cout << "Не удалось открыть файл будут созданы новые записи\n";
 		return;
 	}
 	else
