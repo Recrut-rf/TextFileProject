@@ -85,4 +85,3 @@ int Audience::getClassroomArea() const
 {
 	return classroomArea;
 }
-
