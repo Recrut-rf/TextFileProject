@@ -1,8 +1,7 @@
 #include "Audience.h"
 
 std::ostream & Audience::printAudience(std::ostream & ostr) const
-{
-	// для записи вида: 100,100,100,специализация	
+{		
 	return ostr << roomNumber << ','
 		<< floor << ','
 		<< numberOfSeats << ','
@@ -11,17 +10,15 @@ std::ostream & Audience::printAudience(std::ostream & ostr) const
 }
 
 std::istream & Audience::scanAudience(std::istream & ostr)
-{
-	// актуально для файла, в котором данные разделены ','
-	// например для данных вида: 100,100,100,специализация
+{	
 	ostr >> roomNumber;
-	ostr.ignore();      // пропускаем символ запятой из файла 
+	ostr.ignore();       
 	ostr >> floor;
-	ostr.ignore();      // пропускаем символ запятой из файла
+	ostr.ignore();      
 	ostr >> numberOfSeats;
-	ostr.ignore();      // пропускаем символ запятой из файла 
+	ostr.ignore();      
 	ostr >> classroomArea;
-	ostr.ignore();      // пропускаем символ запятой из файла
+	ostr.ignore();      
 	ostr >> specialization;
 	return ostr;
 }
