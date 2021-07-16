@@ -12,7 +12,7 @@ using std::string;
 
 void MainWindow::show()
 {
-	// для ввода и вывода кириллицы
+	// РґР»СЏ РІРІРѕРґР° Рё РІС‹РІРѕРґР° РєРёСЂРёР»Р»РёС†С‹
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
@@ -25,15 +25,15 @@ void MainWindow::show()
 
 	while (true)
 	{
-		system("cls"); // очистка консоли 
-		cout << "1. Добавление новой записи." << endl;
-		cout << "2. Редактирование записи с указанным номером." << endl;
-		cout << "3. Удаление записи с указанным номером." << endl;
-		cout << "4. Поиск по номеру аудитории." << endl;
-		cout << "5. Поиск аудитории с заданной специализацией." << endl;
-		cout << "6. Вывод информации на экран: для указанного этажа список аудиторий в порядке убывания." << endl;
-		cout << "7. Выход." << endl;
-		cout << "Выберете пункт меню: ";
+		system("cls"); // РѕС‡РёСЃС‚РєР° РєРѕРЅСЃРѕР»Рё 
+		cout << "1. Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕР№ Р·Р°РїРёСЃРё." << endl;
+		cout << "2. Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р·Р°РїРёСЃРё СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РЅРѕРјРµСЂРѕРј." << endl;
+		cout << "3. РЈРґР°Р»РµРЅРёРµ Р·Р°РїРёСЃРё СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РЅРѕРјРµСЂРѕРј." << endl;
+		cout << "4. РџРѕРёСЃРє РїРѕ РЅРѕРјРµСЂСѓ Р°СѓРґРёС‚РѕСЂРёРё." << endl;
+		cout << "5. РџРѕРёСЃРє Р°СѓРґРёС‚РѕСЂРёРё СЃ Р·Р°РґР°РЅРЅРѕР№ СЃРїРµС†РёР°Р»РёР·Р°С†РёРµР№." << endl;
+		cout << "6. Р’С‹РІРѕРґ РёРЅС„РѕСЂРјР°С†РёРё РЅР° СЌРєСЂР°РЅ: РґР»СЏ СѓРєР°Р·Р°РЅРЅРѕРіРѕ СЌС‚Р°Р¶Р° СЃРїРёСЃРѕРє Р°СѓРґРёС‚РѕСЂРёР№ РІ РїРѕСЂСЏРґРєРµ СѓР±С‹РІР°РЅРёСЏ." << endl;
+		cout << "7. Р’С‹С…РѕРґ." << endl;
+		cout << "Р’С‹Р±РµСЂРµС‚Рµ РїСѓРЅРєС‚ РјРµРЅСЋ: ";
 		cin >> menuItem;
 
 		if (menuItem == 1)
@@ -44,7 +44,7 @@ void MainWindow::show()
 		}
 		else if (menuItem == 2)
 		{
-			cout << "Введите номер для редактирования:" << endl;
+			cout << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ:" << endl;
 			cin >> number;
 			workWithAudience.editingAudience(audienceCollection, number);
 			workWithAudience.writeFile(audienceCollection, fileName);
@@ -52,7 +52,7 @@ void MainWindow::show()
 		}
 		else if (menuItem == 3)
 		{
-			cout << "Введите номер для удаления:" << endl;
+			cout << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ:" << endl;
 			cin >> number;
 			workWithAudience.deleteAudience(audienceCollection, number);
 			workWithAudience.writeFile(audienceCollection, fileName);
@@ -61,7 +61,7 @@ void MainWindow::show()
 		}
 		else if (menuItem == 4)
 		{
-			cout << "Введите номер для поиска аудитории:" << endl;
+			cout << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РґР»СЏ РїРѕРёСЃРєР° Р°СѓРґРёС‚РѕСЂРёРё:" << endl;
 			cin >> number;
 			workWithAudience.searchByAudienceNumber(audienceCollection, number);
 			system("pause");
@@ -69,21 +69,21 @@ void MainWindow::show()
 		else if (menuItem == 5)
 		{
 			string specialization = "";
-			cout << "Введите специализацию для поиска:" << endl;
+			cout << "Р’РІРµРґРёС‚Рµ СЃРїРµС†РёР°Р»РёР·Р°С†РёСЋ РґР»СЏ РїРѕРёСЃРєР°:" << endl;
 			cin >> specialization;
 			workWithAudience.findingAudienceWithSpecialty(audienceCollection, specialization);
 			system("pause");
 		}
 		else if (menuItem == 6)
 		{
-			cout << "Введите номер этажа" << endl;
+			cout << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ СЌС‚Р°Р¶Р°" << endl;
 			cin >> number;
 			workWithAudience.showAudienceInfo(audienceCollection, number);
 			system("pause");
 		}
 		else if (menuItem == 7)
 		{
-			cout << "Благодарим за работу." << endl;
+			cout << "Р‘Р»Р°РіРѕРґР°СЂРёРј Р·Р° СЂР°Р±РѕС‚Сѓ." << endl;
 			system("pause");
 			break;
 		}
