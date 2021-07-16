@@ -4,7 +4,6 @@
 class MainWindow
 {
 public:
-
 	void show();
 
 private:
